@@ -1,0 +1,14 @@
+﻿  Main.cpp
+C:\Users\hamsi\Desktop\TemplateProject\LogicSimulator\Main.cpp(58,117): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\hamsi\Desktop\TemplateProject\LogicSimulator\Main.cpp(58,96): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\hamsi\Desktop\TemplateProject\LogicSimulator\Main.cpp(60,89): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\hamsi\Desktop\TemplateProject\LogicSimulator\Main.cpp(60,68): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\hamsi\Desktop\TemplateProject\LogicSimulator\Main.cpp(82,97): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\hamsi\Desktop\TemplateProject\LogicSimulator\Main.cpp(82,78): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\hamsi\Desktop\TemplateProject\LogicSimulator\Main.cpp(89,46): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\hamsi\Desktop\TemplateProject\LogicSimulator\Main.cpp(90,46): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\hamsi\Desktop\TemplateProject\LogicSimulator\Main.cpp(106,120): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\hamsi\Desktop\TemplateProject\LogicSimulator\Main.cpp(106,99): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\hamsi\Desktop\TemplateProject\LogicSimulator\Main.cpp(134,49): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\hamsi\Desktop\TemplateProject\LogicSimulator\Main.cpp(135,49): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+  LogicSimulator.vcxproj -> C:\Users\hamsi\Desktop\TemplateProject\Debug\LogicSimulator.exe
