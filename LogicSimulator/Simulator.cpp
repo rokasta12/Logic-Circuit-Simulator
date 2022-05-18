@@ -15,6 +15,7 @@
 #include "Led.h"
 #include "Wire.h"
 #include "Pin.h"
+#include "Clock.h"
 
 #include <cmath>
 #include <math.h>
@@ -25,9 +26,10 @@ using namespace simulatorClass;
 Simulator::Simulator(sf::RenderWindow *renderWindow){
 	window = renderWindow;
 	headOfObjectList = 0;
+	isSimulating = false;
 	cout << "default simulator constructor" << endl;
-	string bumss[] = {"OR","AND","XOR","NOT","GND","VDD","LED","DFF"};
-	for (int i = 0; i < 8; i++) {
+	string bumss[] = {"OR","AND","XOR","NOT","GND","VDD","LED","DFF","CLOCK"};
+	for (int i = 0; i < 9; i++) {
 		createNewObject(bumss[i],10, 5+100*i, true);
 
 	}
@@ -154,6 +156,9 @@ void Simulator::createNewObject(string objName, float posX, float posY,bool isLo
 	{
 		obptr = new xorGateClass::XorGate(window);
 	}
+	else if (objName == "CLOCK") {
+		obptr = new clockClass::Clock(window);
+	}
 
 	if (obptr) {
 		obptr->setSpritePosition(posX, posY);
@@ -194,7 +199,12 @@ void Simulator::deleteObjectFromObjectList(objectclass::Object* deletePtr){
 		prevPtr = currPtr;
 		currPtr = currPtr->getNext();
 	}
-	prevPtr->setNext(currPtr->getNext());
+	if (currPtr->getNext()) {
+		prevPtr->setNext(currPtr->getNext());
+	}
+	else {
+		prevPtr->setNext(nullptr);
+	}
 	delete currPtr;
 }
 
@@ -240,12 +250,11 @@ bool Simulator::getIsDrawingWire() {
 }
 
 pinClass::Pin* Simulator::getPinPointerOfObj(objectclass::Object*eventObjPtr,float mouseX,float mouseY) {
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < 4; i++) {
 		pinClass::Pin* pinPointer = static_cast<logicElementClass::LogicElement*>(eventObjPtr)->getPinsByIndex(i);
 		sf::Vector2f vect = pinPointer->getPinPosition();
 		sf::FloatRect pinRect(vect.x, vect.y, 10, 10);
 		if (pinRect.contains(mouseX,mouseY)) {
-			cout << "contains amk" << endl;
 			return pinPointer;
 		}
 	}
@@ -261,7 +270,6 @@ pinClass::Pin* Simulator::traverseListAndGetPinPointerOfObj(float mouseX,float m
 				sf::Vector2f vect = pinPointer->getPinPosition();
 				sf::FloatRect pinRect(vect.x, vect.y, 10, 10);
 				if (pinRect.contains(mouseX, mouseY)) {
-					cout << "contains amk" << endl;
 					return pinPointer;
 				}
 			}
@@ -288,31 +296,36 @@ bool Simulator::checkIfWireCanBeDrawn(pinClass::Pin *pinPtr,wire::Wire* wirePtr)
 
 //SIMULATION
 void Simulator::startSimulation(){
-	cout << "simulation start" << endl;
-	objectclass::Object* tempPtr = NULL;
-	tempPtr = headOfObjectList;
-	while (tempPtr) {
-		if (tempPtr->getObjectName() != "WIRE" && tempPtr->getLocked()==false) {
-			static_cast<logicElementClass::LogicElement*>(tempPtr)->calculateOutput();
+	simulationClock.restart();
+	sf::Time elapsedTime = simulationClock.getElapsedTime();
+	while (isSimulating && elapsedTime.asSeconds() < 4) {
+		cout << "simulation start" << endl;
+		objectclass::Object* tempPtr = NULL;
+		tempPtr = headOfObjectList;
+		while (tempPtr) {
+			if (tempPtr->getObjectName() != "WIRE" && tempPtr->getLocked() == false) {
+				static_cast<logicElementClass::LogicElement*>(tempPtr)->calculateOutput();
+			}
+			tempPtr = tempPtr->getNext();
 		}
-		tempPtr = tempPtr->getNext();
+		elapsedTime= simulationClock.getElapsedTime();
 	}
+	setIsSimulating(false);
 }
 
 
 
-void Simulator::checkIfWireIsClicked(float mouseX, float mouseY) {
-	objectclass::Object* tempPtr = NULL;
-	tempPtr = headOfObjectList;
-	if (tempPtr->getObjectName() == "WIRE") {
-		//calculate Right Angle Distance
-		sf::Vector2f point0 = static_cast<wire::Wire*>(tempPtr)->getWireLineByIndex(0);
-		sf::Vector2f point1 = static_cast<wire::Wire*>(tempPtr)->getWireLineByIndex(1);
-		float p1xp0x = point1.x - point0.x;
-		float p1yp0y = point1.y - point1.y;
-		float p0ye0y = point1.y - mouseY;
-		float p0xe0x = point1.x - mouseX;
-		float distance = (abs(p1xp0x*p0ye0y-p0xe0x*p1yp0y)) / (sqrtf(p1xp0x*p1xp0x+p1yp0y*p1yp0y));
-		cout << "distance: " << distance << endl;
+void Simulator::onWireDeleteHandleConnectedTo(objectclass::Object* eventObjPtr) {
+	if (eventObjPtr->getObjectName() == "WIRE") {
+		pinClass::Pin * pin1 = static_cast<wire::Wire*>(eventObjPtr)->getWirePinsPtrByIndex(0);
+		pinClass::Pin* pin2 = static_cast<wire::Wire*>(eventObjPtr)->getWirePinsPtrByIndex(1);
+		pin1->setConnectedToNullptr(pin2);
+		pin2->setConnectedToNullptr(pin1);
+		pin1->setWiresNullptr(eventObjPtr);
+		pin2->setWiresNullptr(eventObjPtr);
 	}
+}
+
+void Simulator::setIsSimulating(bool boolean) {
+	isSimulating = boolean;
 }

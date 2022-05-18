@@ -112,3 +112,7 @@ void LogicElement::directOutputPinResultToConnectedPins(int index) {
 		}
 	}
 }
+
+int LogicElement::getNumPins() {
+	return numPins;
+}

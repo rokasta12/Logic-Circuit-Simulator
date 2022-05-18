@@ -4,7 +4,7 @@
 
 namespace pinClass {
 
-	class Pin //MAX_CONNECTIONS=5
+	class Pin //MAX_CONNECTIONS=10
 	{
 	public:
 		enum pinType { INPUT, OUTPUT };
@@ -32,7 +32,10 @@ namespace pinClass {
 			void setNumOfConnections(bool);
 			void setConnectedToByIndex(Pin*,int);
 			void setConnectedToNullptr(Pin*);
+			void setWiresByIndex(objectclass::Object*,int);
+			void setWiresNullptr(objectclass::Object*);
 
+			objectclass::Object* getWiresByIndex(int);
 			int getType();
 			int getState();
 			int getNumOfConnections();

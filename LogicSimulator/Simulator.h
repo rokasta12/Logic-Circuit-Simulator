@@ -11,6 +11,8 @@ namespace simulatorClass {
 			sf::RenderWindow* window;
 			objectclass::Object* headOfObjectList;
 			bool isDrawingWire;
+			bool isSimulating;
+			sf::Clock simulationClock;
 		public:
 			Simulator(sf::RenderWindow *);
 			void appendObjectList(objectclass::Object*);
@@ -38,12 +40,15 @@ namespace simulatorClass {
 			//EVENT HANDLER,maus pin area icindeyse objenin pininin adresi dondur
 			pinClass::Pin* getPinPointerOfObj(objectclass::Object*,float,float);
 			pinClass::Pin* traverseListAndGetPinPointerOfObj(float, float);
+
 			bool checkIfWireCanBeDrawn(pinClass::Pin*,wire::Wire*);
+			void onWireDeleteHandleConnectedTo(objectclass::Object*);
 
 
 			//simulation
-			void checkIfWireIsClicked(float,float);
 			void startSimulation();
+			void setIsSimulating(bool);
+		
 	};
 }
 

@@ -26,3 +26,7 @@ Button::Button(int textureSelectIndex, sf::RenderWindow*renderWindow){
 void Button::drawObjectToWindow(){
 	window->draw(sprite);
 }
+
+int Button::getButtonIndex() {
+	return buttonIndex;
+}

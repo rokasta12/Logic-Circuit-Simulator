@@ -147,6 +147,7 @@
   <ItemGroup>
     <ClCompile Include="AndGate.cpp" />
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="Clock.cpp" />
     <ClCompile Include="Dff.cpp" />
     <ClCompile Include="Gnd.cpp" />
     <ClCompile Include="Led.cpp" />
@@ -164,6 +165,7 @@
   <ItemGroup>
     <ClInclude Include="AndGate.h" />
     <ClInclude Include="Button.h" />
+    <ClInclude Include="Clock.h" />
     <ClInclude Include="Dff.h" />
     <ClInclude Include="Gnd.h" />
     <ClInclude Include="Led.h" />

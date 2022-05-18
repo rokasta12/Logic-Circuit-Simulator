@@ -22,10 +22,11 @@ namespace logicElementClass {
 			void setPins();// pins are set in simulator.cpp -> createNewObject
 
 			pinClass::Pin *getPinsByIndex(int);
+			int getNumPins();
 
 			virtual void calculateOutput();
 
-			// arguman index, output hangi pins[]'de hangi index'deyse onu ver
+			// arguman index, output pins[]'de hangi index'deyse onu ver
 			void directOutputPinResultToConnectedPins(int);
 		
 	};

@@ -10,6 +10,7 @@ namespace buttonClass {
 		Button(int, sf::RenderWindow*);
 		void drawObjectToWindow();
 		
+		int getButtonIndex();
 	};
 }
 

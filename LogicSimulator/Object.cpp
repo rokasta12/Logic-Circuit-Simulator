@@ -48,7 +48,12 @@ void Object::drawObjectToWindow() {
 //25.04.2022
 
 Object * Object::getNext() {
-	return next;
+	if (this) {
+		return next;
+	}
+	else {
+		return 0;
+	}
 }
 
 void Object::setNext(Object *ptr) {
@@ -92,7 +97,13 @@ bool Object::getLocked() {
 }
 
 string Object::getObjectName() {
-	return objectName;
+	if (this) {
+	 return objectName;
+	}
+	else {
+		return 0;
+	}
+
 }
 
 void Object::setLockedObjectPosition() {

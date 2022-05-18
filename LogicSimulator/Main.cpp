@@ -12,6 +12,7 @@
 #include "XorGate.h"
 #include "Led.h"
 #include "Wire.h"
+#include "Button.h"
 
 using namespace std;
 using namespace objectclass;
@@ -19,13 +20,13 @@ using namespace andGateClass;
 using namespace pinClass;
 int main()
 {
-    sf::RectangleShape rectangle(sf::Vector2f(120.f, 800.f));
+    sf::RectangleShape rectangle(sf::Vector2f(120.f, 900.f));
     rectangle.setFillColor(sf::Color(61, 64, 61));
-    sf::RectangleShape rectangle2(sf::Vector2f(800.f, 75.f));
+    sf::RectangleShape rectangle2(sf::Vector2f(900.f, 75.f));
     rectangle2.setFillColor(sf::Color(61, 64, 61));
 
     // create the window
-    sf::RenderWindow window(sf::VideoMode(800, 800), "Logic Simulator");
+    sf::RenderWindow window(sf::VideoMode(900,900), "Logic Simulator");
     window.setFramerateLimit(60);
 
     simulatorClass::Simulator bum(&window);
@@ -50,7 +51,19 @@ int main()
                     eventObject=bum.getObjectPointerOfClicked(event.mouseButton.x, event.mouseButton.y);
                     if (eventObject) {                
                         if (eventObject->getLocked()) { //toolbar elementi ise
+                            if (eventObject->getObjectName() == "BUTTON") {
+                                buttonClass::Button* buttonPtr = static_cast<buttonClass::Button*>(eventObject);
+                                if (buttonPtr->getButtonIndex()) { //start simulation if 0
+                                    bum.setIsSimulating(false);
+                                }
+                                else {
+                                    bum.setIsSimulating(true);
+                                    bum.startSimulation();
+                                }
+                            }
+                            else { //lojik kapilarý suruklemek icin selectle
                             eventObject->setSelected(true);                       
+                            }
                         }
                         else { //toolbar elementi degilse   
                             bum.resetSelectedOfObjects(); //butun selectlenmisleri sil bir
@@ -115,6 +128,8 @@ int main()
                             int targetPinNumOfConnections = pinPtrOfObj->getNumOfConnections();
                             basePinPtr->setConnectedToByIndex(pinPtrOfObj, basePinNumOfConnections);
                             pinPtrOfObj->setConnectedToByIndex(basePinPtr, targetPinNumOfConnections);
+                            basePinPtr->setWiresByIndex(wireObjectPointer, basePinNumOfConnections);
+                            pinPtrOfObj->setWiresByIndex(wireObjectPointer, targetPinNumOfConnections);
                             basePinPtr->setNumOfConnections(true);
                             pinPtrOfObj->setNumOfConnections(true);
                         }
@@ -148,12 +163,24 @@ int main()
                     eventObject = bum.getObjectPointerOfSelected();
                     if (eventObject) {
                         if (!(eventObject->getLocked())) { //check if toolbar element or not
-                            if (eventObject->getObjectName() == "WIRE") {
-                               Pin* pin1= static_cast<wire::Wire*>(eventObject)->getWirePinsPtrByIndex(0);
-                               Pin* pin2 = static_cast<wire::Wire*>(eventObject)->getWirePinsPtrByIndex(1);
-                               pin1->setConnectedToNullptr(pin2);
-                               pin2->setConnectedToNullptr(pin1);
+                            bum.onWireDeleteHandleConnectedTo(eventObject);
+                            //sprite silerken bagli wire'larida silme kýsmý
+                            if (eventObject->getObjectName() != "WIRE") {
+                                logicElementClass::LogicElement* logicElePtr = static_cast<logicElementClass::LogicElement*>(eventObject);
+                                int numPins=logicElePtr->getNumPins();
+                                for (int i = 0; i < numPins; i++) {
+                                    pinClass::Pin* pinPtr = logicElePtr->getPinsByIndex(i);
+                                    int numOfConnectionsOfPin = pinPtr->getNumOfConnections();
+                                    for (int j = 0; j < numOfConnectionsOfPin; j++) {
+                                        Object* wireObjPtr=pinPtr->getWiresByIndex(j);
+                                        if (wireObjPtr) {
+                                            bum.onWireDeleteHandleConnectedTo(wireObjPtr);
+                                            bum.deleteObjectFromObjectList(wireObjPtr);
+                                        }
+                                    }
+                                }
                             }
+                            //sprite silerken bagli wire'larida silme kýsmý son
                             bum.deleteObjectFromObjectList(eventObject);
                         }
                     }

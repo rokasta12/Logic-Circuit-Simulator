@@ -42,7 +42,7 @@ namespace objectclass {
 
 
 			
-			virtual void setLineVertice(float,float);//eventte static cast yapmamak icin
+			virtual void setLineVertice(float,float);//eventte static cast yapmamak icin, used for wires
 			
 	};
 

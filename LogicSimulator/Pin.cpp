@@ -1,5 +1,7 @@
 #include<iostream>
 #include "Pin.h"
+#include "Object.h"
+
 using namespace pinClass;
 using namespace std;
 
@@ -7,10 +9,10 @@ Pin::Pin() {
 	cout << "pin default const" << endl;
 	state = Pin::pinState::HIGHZ;
 	numOfConnections = 0;
-/*	for (int i = 0; i < 9; i++) {
-		Pin* asd;
-		connectedTo[i] =  asd;
-	}*/
+	for (int i = 0; i < 10; i++) {
+		
+		wires[i] = nullptr;
+	}
 }
 
 void Pin::setPinPosition(float x,float y) {
@@ -68,6 +70,23 @@ void Pin::setConnectedToNullptr(Pin* deletePtr) {
 		Pin* isSamePtr = connectedTo[i];
 		if (isSamePtr && (isSamePtr==deletePtr)) {
 			connectedTo[i] = nullptr;
+		}
+	}
+}
+
+void Pin::setWiresByIndex(objectclass::Object* objectWirePtr,int index) {
+	wires[index] = objectWirePtr;
+}
+
+objectclass::Object* Pin::getWiresByIndex(int index){
+	return wires[index];
+}
+
+void Pin::setWiresNullptr(objectclass::Object* deletePtr) {
+	for (int i = 0; i < 9; i++) {
+		objectclass::Object* isSamePtr = wires[i];
+		if (isSamePtr && (isSamePtr == deletePtr)) {
+			wires[i] = nullptr;
 		}
 	}
 }

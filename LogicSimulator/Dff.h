@@ -6,6 +6,7 @@ namespace dff {
 	class Dff :public logicElementClass::LogicElement {
 	public:
 		Dff(sf::RenderWindow*);
+		void calculateOutput();
 	};
 }
 
