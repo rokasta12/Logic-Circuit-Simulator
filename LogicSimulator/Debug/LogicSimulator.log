@@ -1,0 +1,41 @@
+<<<<<<< HEAD
+﻿  Main.cpp
+C:\Users\kutlu\Downloads\Logic-Circuit-Simulator-main\Logic-Circuit-Simulator-main\LogicSimulator\Main.cpp(68,123): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\kutlu\Downloads\Logic-Circuit-Simulator-main\Logic-Circuit-Simulator-main\LogicSimulator\Main.cpp(68,102): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\kutlu\Downloads\Logic-Circuit-Simulator-main\Logic-Circuit-Simulator-main\LogicSimulator\Main.cpp(70,95): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\kutlu\Downloads\Logic-Circuit-Simulator-main\Logic-Circuit-Simulator-main\LogicSimulator\Main.cpp(70,74): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\kutlu\Downloads\Logic-Circuit-Simulator-main\Logic-Circuit-Simulator-main\LogicSimulator\Main.cpp(91,97): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\kutlu\Downloads\Logic-Circuit-Simulator-main\Logic-Circuit-Simulator-main\LogicSimulator\Main.cpp(91,78): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\kutlu\Downloads\Logic-Circuit-Simulator-main\Logic-Circuit-Simulator-main\LogicSimulator\Main.cpp(98,46): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\kutlu\Downloads\Logic-Circuit-Simulator-main\Logic-Circuit-Simulator-main\LogicSimulator\Main.cpp(99,46): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\kutlu\Downloads\Logic-Circuit-Simulator-main\Logic-Circuit-Simulator-main\LogicSimulator\Main.cpp(115,126): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\kutlu\Downloads\Logic-Circuit-Simulator-main\Logic-Circuit-Simulator-main\LogicSimulator\Main.cpp(115,105): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\kutlu\Downloads\Logic-Circuit-Simulator-main\Logic-Circuit-Simulator-main\LogicSimulator\Main.cpp(145,49): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\kutlu\Downloads\Logic-Circuit-Simulator-main\Logic-Circuit-Simulator-main\LogicSimulator\Main.cpp(146,49): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+  LogicSimulator.vcxproj -> C:\Users\kutlu\Downloads\Logic-Circuit-Simulator-main\Logic-Circuit-Simulator-main\Debug\LogicSimulator.exe
+=======
+﻿  Simulator.cpp
+C:\Users\hamsi\Desktop\TemplateProject\LogicSimulator\Simulator.cpp(33,33): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\hamsi\Desktop\TemplateProject\LogicSimulator\Simulator.cpp(58,56): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\hamsi\Desktop\TemplateProject\LogicSimulator\Simulator.cpp(58,49): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\hamsi\Desktop\TemplateProject\LogicSimulator\Simulator.cpp(99,31): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\hamsi\Desktop\TemplateProject\LogicSimulator\Simulator.cpp(99,23): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\hamsi\Desktop\TemplateProject\LogicSimulator\Simulator.cpp(178,39): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  LogicSimulator.vcxproj -> C:\Users\hamsi\Desktop\TemplateProject\Debug\LogicSimulator.exe
+>>>>>>> 8c70ed59b910d672f2fc80f95b22b8333fcf3402
