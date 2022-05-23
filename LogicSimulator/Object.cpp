@@ -15,7 +15,6 @@ Object::Object() {
 	selectedLineStrip[2] = sf::Vertex(sf::Vector2f(0, 0), sf::Color(255, 0, 0, 255));
 	selectedLineStrip[3] = sf::Vertex(sf::Vector2f(0, 0), sf::Color(255, 0, 0, 255));
 	selectedLineStrip[4] = sf::Vertex(sf::Vector2f(0, 0), sf::Color(255, 0, 0, 255));
-	cout << "def constr" << endl;
 }
 
 void Object::setTexture(std::string textureArr[],int textureNamesLength) {
@@ -26,12 +25,10 @@ void Object::setTexture(std::string textureArr[],int textureNamesLength) {
 			cout << "Failed to load texture!" << endl;
 		}
 	}
-	cout << "setTexture finished" << endl;
 }
 
 void Object::setSpriteTexture(int textureIndex) {
 	sprite.setTexture(texture[textureIndex]);
-	cout << "setSpriteTexture finished" << endl;
 }
 
 sf::Sprite Object::getSprite() {
@@ -45,7 +42,7 @@ void Object::drawObjectToWindow() {
 		window->draw(sprite);
 }
 
-//25.04.2022
+
 
 Object * Object::getNext() {
 	if (this) {

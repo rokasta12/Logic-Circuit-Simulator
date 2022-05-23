@@ -7,7 +7,6 @@ using namespace std;
 using namespace vdd;
 
 Vdd::Vdd(sf::RenderWindow* renderWindow) {
-	cout << "vdd constructor" << endl;
 	objectName = "VDD";
 	window = renderWindow;
 	numPins = 1;
@@ -24,5 +23,4 @@ void Vdd::calculateOutput() {
 		pinClass::Pin* pinPtr = pins[0].getConnectedToSinglePtr(i);
 		pinPtr->setState(pinClass::Pin::pinState::HIGH);
 	}
-	cout << "pins are set to 1" << endl;
 };

@@ -7,14 +7,13 @@ using namespace std;
 using namespace logicElementClass;
 
 LogicElement::LogicElement() {
-	cout << "logic element class constructor" << endl;
+	
 }
 
 void LogicElement::setPins(){
 	sf::Vector2f spritePosition = sprite.getPosition();
 	float x = spritePosition.x;
 	float y = spritePosition.y;
-	cout << "sprite pos" << x << " " << y << endl;
 	switch (numPins)
 	{
 		case 1:
@@ -82,7 +81,6 @@ void LogicElement::setPins(){
 			pins[3].setState(pinClass::Pin::pinState::HIGHZ);
 			break;
 		default:
-			cout << "pins are set" << endl;
 			break;
 	}
 }

@@ -5,7 +5,7 @@
 #include "Pin.h"
 #include "Wire.h"
 
-namespace simulatorClass {
+namespace simulatorClass { 
 	class Simulator {
 		protected:
 			sf::RenderWindow* window;

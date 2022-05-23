@@ -16,7 +16,6 @@ Button::Button(int textureSelectIndex, sf::RenderWindow*renderWindow){
 	objectName = "BUTTON";
 	next = NULL;
 	buttonIndex = textureSelectIndex;
-	cout << "button constr" << endl;
 	string textureNames[] = { "START","STOP" };
 	int textureNamesLength = sizeof(textureNames) / sizeof(textureNames[0]);
 	setTexture(textureNames, textureNamesLength);

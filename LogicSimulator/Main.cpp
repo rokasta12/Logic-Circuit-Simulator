@@ -29,7 +29,7 @@ int main()
     sf::RenderWindow window(sf::VideoMode(900,900), "Logic Simulator");
     window.setFramerateLimit(60);
 
-    simulatorClass::Simulator bum(&window);
+    simulatorClass::Simulator simulator(&window);
   
     // run the program as long as the window is open
     while (window.isOpen())
@@ -41,24 +41,29 @@ int main()
             // "close requested" event: we close the window
             if (event.type == sf::Event::Closed)
                 window.close();
-
-
-
             if (event.type == sf::Event::MouseButtonPressed){
                 if (event.mouseButton.button == sf::Mouse::Left){ //select an object or deselect all
                                               
                     Object* eventObject = NULL;
-                    eventObject=bum.getObjectPointerOfClicked(event.mouseButton.x, event.mouseButton.y);
+                    eventObject=simulator.getObjectPointerOfClicked(event.mouseButton.x, event.mouseButton.y);
                     if (eventObject) {                
                         if (eventObject->getLocked()) { //toolbar elementi ise
                             if (eventObject->getObjectName() == "BUTTON") {
                                 buttonClass::Button* buttonPtr = static_cast<buttonClass::Button*>(eventObject);
                                 if (buttonPtr->getButtonIndex()) { //start simulation if 0
+<<<<<<< HEAD
+                                    simulator.setIsSimulating(false);
+                                }
+                                else {
+                                    simulator.setIsSimulating(true);
+                                    simulator.startSimulation();
+=======
                                     bum.setIsSimulating(false);
                                 }
                                 else {
                                     bum.setIsSimulating(true);
                                     bum.startSimulation();
+>>>>>>> 8c70ed59b910d672f2fc80f95b22b8333fcf3402
                                 }
                             }
                             else { //lojik kapilarý suruklemek icin selectle
@@ -66,21 +71,20 @@ int main()
                             }
                         }
                         else { //toolbar elementi degilse   
-                            bum.resetSelectedOfObjects(); //butun selectlenmisleri sil bir
+                            simulator.resetSelectedOfObjects(); //butun selectlenmisleri sil bir
 
-                            Pin* pinPtr = bum.getPinPointerOfObj(eventObject, event.mouseButton.x, event.mouseButton.y);
+                            Pin* pinPtr = simulator.getPinPointerOfObj(eventObject, event.mouseButton.x, event.mouseButton.y);
                             if (pinPtr) {//wire cizmeyi dene
-                                bum.createNewWire(event.mouseButton.x, event.mouseButton.y, pinPtr);
-                                bum.setIsDrawingWire(true);
+                                simulator.createNewWire(event.mouseButton.x, event.mouseButton.y, pinPtr);
+                                simulator.setIsDrawingWire(true);
                             }
                             else {//wire cizme olayi degilse selectle
-                                cout << "selected" << endl;
                                 eventObject->setSelected(true);
                             }
                         }
                     }
                     else {
-                        bum.resetSelectedOfObjects();
+                        simulator.resetSelectedOfObjects();
                     }
                 }
             }
@@ -89,14 +93,14 @@ int main()
             {
                 if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
                 {
-                    if (bum.getIsDrawingWire()) {//move drawing wire
-                        Object* wireObjectPointer = bum.getWireObjectPointer();
+                    if (simulator.getIsDrawingWire()) {//move drawing wire
+                        Object* wireObjectPointer = simulator.getWireObjectPointer();
                         if (wireObjectPointer) {
                             wireObjectPointer->setLineVertice(event.mouseMove.x, event.mouseMove.y);
                         }
                     }
                     else { //move locked sprite
-                        Object* eventObject = bum.getObjectPointerOfSelected();
+                        Object* eventObject = simulator.getObjectPointerOfSelected();
                         if (eventObject) {  
                             if (eventObject->getLocked()) {
                                 float mouseX = event.mouseMove.x;
@@ -115,11 +119,11 @@ int main()
             {
                 if (event.mouseButton.button == sf::Mouse::Left)
                 {
-                    if (bum.getIsDrawingWire()) { //wire yerlestirebiliyor mu kontrol et, yerlestiremezse sil
-                        Pin* pinPtrOfObj = bum.traverseListAndGetPinPointerOfObj(event.mouseButton.x, event.mouseButton.y);
-                        Object* wireObjectPointer = bum.getWireObjectPointer();
+                    if (simulator.getIsDrawingWire()) { //wire yerlestirebiliyor mu kontrol et, yerlestiremezse sil
+                        Pin* pinPtrOfObj = simulator.traverseListAndGetPinPointerOfObj(event.mouseButton.x, event.mouseButton.y);
+                        Object* wireObjectPointer = simulator.getWireObjectPointer();
                         wire::Wire* wirePtr = static_cast<wire::Wire*>(wireObjectPointer);
-                        if (bum.checkIfWireCanBeDrawn(pinPtrOfObj,wirePtr)) {                       
+                        if (simulator.checkIfWireCanBeDrawn(pinPtrOfObj,wirePtr)) {                       
                             wirePtr->setPointerOfSecondPin(pinPtrOfObj);
                            
                             //connectedTo setleme mekaný
@@ -134,12 +138,12 @@ int main()
                             pinPtrOfObj->setNumOfConnections(true);
                         }
                         else {
-                            bum.deleteObjectFromObjectList(wireObjectPointer);
+                            simulator.deleteObjectFromObjectList(wireObjectPointer);
                         }                       
-                        bum.setIsDrawingWire(false);                        
+                        simulator.setIsDrawingWire(false);                        
                     }
                     else{ //yeni lojik element yaratma
-                        Object* eventObject = bum.getObjectPointerOfSelected();
+                        Object* eventObject = simulator.getObjectPointerOfSelected();
                         if(eventObject){
                             if (eventObject->getLocked()) {  //locked object position reset, create new object           
                                 string eventObjName = eventObject->getObjectName();      
@@ -148,7 +152,7 @@ int main()
                                 eventObject->setSelected(false);
                                 float mousePosX = event.mouseButton.x;
                                 float mousePosY = event.mouseButton.y;
-                                bum.createNewObject(eventObjName, mousePosX, mousePosY);
+                                simulator.createNewObject(eventObjName, mousePosX, mousePosY);
                             }
                         }
                     }
@@ -160,10 +164,14 @@ int main()
                 if (event.key.code == sf::Keyboard::Delete)
                 {
                     Object* eventObject = NULL;
-                    eventObject = bum.getObjectPointerOfSelected();
+                    eventObject = simulator.getObjectPointerOfSelected();
                     if (eventObject) {
                         if (!(eventObject->getLocked())) { //check if toolbar element or not
+<<<<<<< HEAD
+                            simulator.onWireDeleteHandleConnectedTo(eventObject);
+=======
                             bum.onWireDeleteHandleConnectedTo(eventObject);
+>>>>>>> 8c70ed59b910d672f2fc80f95b22b8333fcf3402
                             //sprite silerken bagli wire'larida silme kýsmý
                             if (eventObject->getObjectName() != "WIRE") {
                                 logicElementClass::LogicElement* logicElePtr = static_cast<logicElementClass::LogicElement*>(eventObject);
@@ -174,20 +182,29 @@ int main()
                                     for (int j = 0; j < numOfConnectionsOfPin; j++) {
                                         Object* wireObjPtr=pinPtr->getWiresByIndex(j);
                                         if (wireObjPtr) {
+<<<<<<< HEAD
+                                            simulator.onWireDeleteHandleConnectedTo(wireObjPtr);
+                                            simulator.deleteObjectFromObjectList(wireObjPtr);
+=======
                                             bum.onWireDeleteHandleConnectedTo(wireObjPtr);
                                             bum.deleteObjectFromObjectList(wireObjPtr);
+>>>>>>> 8c70ed59b910d672f2fc80f95b22b8333fcf3402
                                         }
                                     }
                                 }
                             }
                             //sprite silerken bagli wire'larida silme kýsmý son
+<<<<<<< HEAD
+                            simulator.deleteObjectFromObjectList(eventObject);
+=======
                             bum.deleteObjectFromObjectList(eventObject);
+>>>>>>> 8c70ed59b910d672f2fc80f95b22b8333fcf3402
                         }
                     }
                 }
                 if (event.key.code == sf::Keyboard::Numpad5)
                 {
-                    bum.startSimulation();
+                    simulator.startSimulation();
                 }
             }
 
@@ -203,7 +220,7 @@ int main()
 
         window.draw(rectangle);
         window.draw(rectangle2);
-        bum.traverseAndDrawAllObjects();
+        simulator.traverseAndDrawAllObjects();
    
         window.display();
     }

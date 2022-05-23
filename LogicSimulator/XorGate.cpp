@@ -7,7 +7,6 @@ using namespace std;
 using namespace xorGateClass;
 
 XorGate::XorGate(sf::RenderWindow* renderWindow) {
-	cout << "xorgate constructor" << endl;
 	objectName = "XOR";
 	window = renderWindow;
 	numPins = 3;
@@ -19,7 +18,6 @@ XorGate::XorGate(sf::RenderWindow* renderWindow) {
 }
 
 void XorGate::calculateOutput() {
-	cout << "xor gate calculate" << endl;
 	int pin0state = pins[0].getState();
 	int pin1state = pins[1].getState();
 	if (pin0state != pinClass::Pin::pinState::HIGHZ

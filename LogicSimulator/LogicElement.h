@@ -25,8 +25,11 @@ namespace logicElementClass {
 			int getNumPins();
 
 			virtual void calculateOutput();
+<<<<<<< HEAD
+=======
 
 			// arguman index, output pins[]'de hangi index'deyse onu ver
+>>>>>>> 8c70ed59b910d672f2fc80f95b22b8333fcf3402
 			void directOutputPinResultToConnectedPins(int);
 		
 	};

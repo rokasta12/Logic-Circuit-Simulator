@@ -7,7 +7,6 @@ using namespace std;
 using namespace gnd;
 
 Gnd::Gnd(sf::RenderWindow* renderWindow) {
-	cout << "ground constructor" << endl;
 	objectName = "GND";
 	window = renderWindow;
 	numPins = 1;
@@ -25,5 +24,4 @@ void Gnd::calculateOutput() {
 		pinClass::Pin* pinPtr = pins[0].getConnectedToSinglePtr(i);
 		pinPtr->setState(pinClass::Pin::pinState::LOW);
 	}
-	cout << "pins are set to 0" << endl;
 }

@@ -6,7 +6,6 @@ using namespace pinClass;
 using namespace std;
 
 Pin::Pin() {
-	cout << "pin default const" << endl;
 	state = Pin::pinState::HIGHZ;
 	numOfConnections = 0;
 	for (int i = 0; i < 10; i++) {

@@ -18,7 +18,7 @@ namespace pinClass {
 			bool isSrc[10];
 
 			Pin* connectedTo[10];
-			objectclass::Object* wires[10]; //friend yapmadin
+			objectclass::Object* wires[10];
 			int numOfConnections;
 			sf::Vector2f pinPosition;
 			pinState state;

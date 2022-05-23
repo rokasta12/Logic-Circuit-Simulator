@@ -7,18 +7,16 @@ using namespace std;
 using namespace andGateClass;
 
 AndGate::AndGate(sf::RenderWindow *renderWindow) {
-	cout << "andgate constructor" << endl;
 	objectName = "AND";
 	window = renderWindow;
 	numPins = 3;
-	string textureNames[] = { "AND"};
+	string textureNames[] = {"AND"};
 	int textureNamesLength = sizeof(textureNames) / sizeof(textureNames[0]);
 	setTexture(textureNames, textureNamesLength);
 	setSpriteTexture(0);
 }
 
 void AndGate::calculateOutput() {
-	cout << "and gate calculate" << endl;
 	int pin0state = pins[0].getState();
 	int pin1state = pins[1].getState();
 	if (pin0state != pinClass::Pin::pinState::HIGHZ

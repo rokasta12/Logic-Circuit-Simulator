@@ -16,7 +16,10 @@
 #include "Wire.h"
 #include "Pin.h"
 #include "Clock.h"
+<<<<<<< HEAD
+=======
 
+>>>>>>> 8c70ed59b910d672f2fc80f95b22b8333fcf3402
 #include <cmath>
 #include <math.h>
 using namespace std;
@@ -27,11 +30,17 @@ Simulator::Simulator(sf::RenderWindow *renderWindow){
 	window = renderWindow;
 	headOfObjectList = 0;
 	isSimulating = false;
+<<<<<<< HEAD
+	string items[] = {"OR","AND","XOR","NOT","GND","VDD","LED","DFF","CLOCK"};
+	for (int i = 0; i < 9; i++) {
+		createNewObject(items[i],10, 5+100*i, true);
+=======
 	cout << "default simulator constructor" << endl;
 	string bumss[] = {"OR","AND","XOR","NOT","GND","VDD","LED","DFF","CLOCK"};
 	for (int i = 0; i < 9; i++) {
 		createNewObject(bumss[i],10, 5+100*i, true);
 
+>>>>>>> 8c70ed59b910d672f2fc80f95b22b8333fcf3402
 	}
 	createButtonToolBar();
 }
@@ -95,7 +104,6 @@ objectclass::Object* Simulator::getObjectPointerOfClicked(int mouseX,int mouseY)
 						rect=sf::FloatRect (point0.x - 5, point0.y - 5, point1.x - point0.x + 10, point1.y - point0.y + 10);
 					}
 				}
-				cout << "distance: " << closenessToLine<< endl;
 				if (rect.contains(mouseX, mouseY)) {
 					return tempPtr;
 				}
@@ -298,8 +306,12 @@ bool Simulator::checkIfWireCanBeDrawn(pinClass::Pin *pinPtr,wire::Wire* wirePtr)
 void Simulator::startSimulation(){
 	simulationClock.restart();
 	sf::Time elapsedTime = simulationClock.getElapsedTime();
+<<<<<<< HEAD
+	while (isSimulating && elapsedTime.asSeconds() < 5) {
+=======
 	while (isSimulating && elapsedTime.asSeconds() < 4) {
 		cout << "simulation start" << endl;
+>>>>>>> 8c70ed59b910d672f2fc80f95b22b8333fcf3402
 		objectclass::Object* tempPtr = NULL;
 		tempPtr = headOfObjectList;
 		while (tempPtr) {

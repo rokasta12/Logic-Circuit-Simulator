@@ -6,7 +6,6 @@ using namespace std;
 using namespace dff;
 
 Dff::Dff(sf::RenderWindow* renderWindow) {
-	cout << "DFF constructor" << endl;
 	objectName = "DFF";
 	window = renderWindow;
 	numPins = 4;
@@ -18,7 +17,10 @@ Dff::Dff(sf::RenderWindow* renderWindow) {
 }
 
 void Dff::calculateOutput() {
+<<<<<<< HEAD
+=======
 	cout << "dff calculate" << endl;
+>>>>>>> 8c70ed59b910d672f2fc80f95b22b8333fcf3402
 	int pin0state = pins[0].getState();
 	int pin1state = pins[1].getState();
 	if (pin0state != pinClass::Pin::pinState::HIGHZ
